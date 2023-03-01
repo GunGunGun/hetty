@@ -15,11 +15,15 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "19.7.x"
+      - run: dir
       - run: cd admin
+      - run: dir
       - run: yarn install
       - run: dir
       - run: yarn export
+      - run: dir
       - run: cd ../
+      - run: dir
       - run: make setup
       - run: make build
       - name: Dir
