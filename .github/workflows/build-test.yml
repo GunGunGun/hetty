@@ -30,23 +30,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
       - run: make build
-  test:
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        go: ["1.17", "1.16"]
-    name: Go ${{ matrix.go }} - Test
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-go@v2
+      - name: Dir
+        run: dir
+      - name: Ls
+        run: ls
+      - uses: actions/upload-artifact@v3
         with:
-          go-version: ${{ matrix.go }}
-      - uses: actions/cache@v2
-        with:
-          path: |
-            ~/.cache/go-build
-            ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
-      - run: go test ./pkg/...
+          name: my-artifact
+          path: D:\a\Houki\ #
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v3
