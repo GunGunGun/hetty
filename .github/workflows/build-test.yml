@@ -15,20 +15,12 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "19.7.x"
-      - uses: actions/cache@v2
-        with:
-          path: |
-            ~/.cache/go-build
-            ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
-      - uses: actions/cache@v2
-        with:
-          path: ${{ github.workspace }}/admin/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+      - run: cd hetty
+      - run: cd admin
+      - run: yarn install
+      - run: yarn export
+      - run: cd ../
+      - run: make setup
       - run: make build
       - name: Dir
         run: dir
