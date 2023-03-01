@@ -4,6 +4,9 @@
  * @type {import('next').NextConfig}
  **/
 const nextConfig = {
+  optimization: {
+    minimize: false,
+  },
   reactStrictMode: true,
   trailingSlash: true,
   async rewrites() {
